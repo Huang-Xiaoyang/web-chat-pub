@@ -1,0 +1,48 @@
+### 注册用户
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "alice",
+    "password": "123456"
+}
+
+### 登录用户
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "alice",
+    "password": "123456"
+}
+
+### 测试认证接口（带Token）
+GET http://localhost:8080/api/test
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGljZSIsInVzZXJJZCI6MSwiaWF0IjoxNzc5MzM0MzI4LCJleHAiOjE3NzkzNDE1Mjh9.uwvVsVN6kADMnR_tIAKfwegFF1TM1_r--a-rkIeKOvU
+
+### 发送消息
+POST http://localhost:8080/api/chat/send
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGljZSIsInVzZXJJZCI6MSwiaWF0IjoxNzc5MzQ3MjQwLCJleHAiOjE3NzkzNTQ0NDB9.fLx4UDbAQoNEarSjmXcmFYt2u8Tudd-iv-R8LTUYrY4
+Content-Type: application/json
+
+{
+    "message": "你好，你是奶龙"
+}
+
+### 测试历史记录
+GET http://localhost:8080/api/chat/history
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGljZSIsInVzZXJJZCI6MSwiaWF0IjoxNzc5MzQ2MjMxLCJleHAiOjE3NzkzNTM0MzF9.glL0-DEpqdyHcnkIhCa5ZIJUdyFUzctDbMkd7np6tw8
+
+### 1. 获取验证码
+GET http://localhost:8080/api/captcha/get
+
+### 2. 验证码登录
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "alice",
+    "password": "123456",
+    "captchaId": "a7c45e9b-ddbb-48e6-b0e4-a2092b32a0f1",
+    "captchaAnswer": "61"
+}
