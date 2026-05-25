@@ -30,12 +30,12 @@ deepseek:
     model: ${DEEPSEEK_MODEL}
   
 server:
-  port: 8443
+  port: ${SERVER_PORT:8443}
   ssl:
-    key-store: E:\chat-agent\key\keystore.p12   
-    key-store-password: 050305        
+    key-store: ${SSL_KEY_STORE:}  
+    key-store-password: ${SSL_PASSWORD:}    
     key-store-type: PKCS12             
-    key-alias: myalias                 
+    key-alias: ${SSL_ALIAS:myalias}               
                   
 # # JWT 配置（生产环境用环境变量）
 # jwt:
