@@ -36,6 +36,7 @@ server:
     key-store-password: 050305        
     key-store-type: PKCS12             
     key-alias: myalias                 
+                  
 # # JWT 配置（生产环境用环境变量）
 # jwt:
 #   secret: ${JWT_SECRET:mySecretKey12345678901234567890123456789012}
