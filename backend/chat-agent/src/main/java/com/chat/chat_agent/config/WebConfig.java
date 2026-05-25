@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     
@@ -14,12 +13,19 @@ public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private AuditLogInterceptor auditLogInterceptor;
     
+    @Autowired
+    private NonceInterceptor nonceInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 审计日志拦截器（记录所有请求）
         registry.addInterceptor(auditLogInterceptor)
                 .addPathPatterns("/**")
                 .order(1);
+        
+        // 防重放拦截器
+        registry.addInterceptor(nonceInterceptor)
+                .addPathPatterns("/api/**")
+                .order(2);
         
         // JWT 认证拦截器
         registry.addInterceptor(jwtAuthInterceptor)
@@ -29,6 +35,6 @@ public class WebConfig implements WebMvcConfigurer {
                     "/api/auth/login",
                     "/api/captcha/get"
                 )
-                .order(2);
+                .order(3);
     }
 }
