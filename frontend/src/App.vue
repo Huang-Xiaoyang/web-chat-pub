@@ -137,8 +137,8 @@ const registerForm = ref({
 const captchaImage = ref('')
 
 // API 基础地址
-const API_BASE = 'http://localhost:8080'
-
+//const API_BASE = 'http://localhost:8080'
+const API_BASE = 'https://localhost:8443'
 // 配置 axios
 axios.defaults.baseURL = API_BASE
 

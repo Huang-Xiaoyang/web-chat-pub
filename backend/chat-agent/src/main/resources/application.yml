@@ -32,7 +32,7 @@ deepseek:
 server:
   port: 8443
   ssl:
-    key-store: key\keystore.p12       
+    key-store: E:\chat-agent\key\keystore.p12   
     key-store-password: 050305        
     key-store-type: PKCS12             
     key-alias: myalias                 
