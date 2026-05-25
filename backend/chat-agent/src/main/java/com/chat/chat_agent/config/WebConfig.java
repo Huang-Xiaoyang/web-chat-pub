@@ -11,14 +11,24 @@ public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private JwtAuthInterceptor jwtAuthInterceptor;
     
+    @Autowired
+    private AuditLogInterceptor auditLogInterceptor;
+    
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        // 审计日志拦截器（记录所有请求）
+        registry.addInterceptor(auditLogInterceptor)
+                .addPathPatterns("/**")
+                .order(1);
+        
+        // JWT 认证拦截器
         registry.addInterceptor(jwtAuthInterceptor)
-                .addPathPatterns("/api/**")                    // 拦截所有 /api/ 开头的请求
+                .addPathPatterns("/api/**")
                 .excludePathPatterns(
-                    "/api/auth/register",                      // 注册接口不拦截
-                    "/api/auth/login",                          // 登录接口不拦截
+                    "/api/auth/register",
+                    "/api/auth/login",
                     "/api/captcha/get"
-                );
+                )
+                .order(2);
     }
 }
